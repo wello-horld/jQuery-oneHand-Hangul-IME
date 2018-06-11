@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery 한 손 한글 입력기</title>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <style>
+        h1 { font-size: 30px; }
+        h2 { font-size: 20px; line-height: 20px; }
+        body { padding: 10px; line-height: 22px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="span8">
+            <h1>jQuery 한 손 한글 입력기</h1>
+            <section>
+                <p>한/영 변환: Alt+Shift (Hangul OneHand / Qwerty)</p>
+                <textarea class="input-block-level" rows="10" cols="60" autofocus="autofocus"></textarea>
+            </section>
+            <p><br></p>
+            <h2>자판 배열</h2>
+            <img src="oneHandHangul.gif" width="700" alt="한 손 자판 배열">
+            <p><br><br></p>
+            <h2>사용법</h2>
+            <section>
+                <p>아무 조작 없이 입력하면 오른쪽 아래 글자가 입력됩니다.<br>
+                Modify 키를 누른 채 입력하면 오른쪽 위 글자가 입력됩니다.<br>
+                Shift 키를 누른 채 입력하면 왼쪽 아래 글자가 입력됩니다.<br>
+                Shift 키와 Modify 키를 같이 누른 채 입력하면 왼쪽 위 글자가 입력됩니다.<br>
+                Shift 키를 짧게 누른 후 뗄 경우 바로 다음 글자에 한해서 Shift 키를 누르고 있는 효과를 얻습니다.<br>
+                    (다시 한 번 짧게 누르면 그 효과가 사라집니다)<br>
+                쌍자음의 경우 빠른 연타를 통해 입력할 수 있습니다.<br>
+                'ㅢ'의 경우는 'ㅣ'+'ㅣ'의 조합, 'ㅒ'의 경우는 'ㅐ'+'ㅐ'의 조합, 'ㅖ'의 경우는 'ㅔ'+'ㅔ'의 조합으로 입력합니다<br>
+                Tab 키는 입력되지 않습니다</p>
+            </section>
+            <p><br></p>
+            <h2>알려진 문제점</h2>
+            <section>
+                <p>(영문 쿼티 자판 기준) 7키를 이용한 Backspace가 정상적으로 적용되지 않습니다.<br>
+                Modify key가 눌린 상태에서 Shift 고정키가 적용되지 않습니다.<br>
+                쿼티 한 손 자판이 구현되지 않았습니다. </p>
+            </section>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="jQuery-oneHandIME-standalone.min.js"></script>
+<script>
+    $('textarea').onehandime();
+    $.get('bookmarklet.min.js', function(data) {
+        $('#bookmarklet').attr('href', 'javascript:' + data);
+    });
+    $('html').bind('keypress', function(e) {
+        if (e.keyCode === 32) return false;
+    });
+</script>
+</body>
+</html>
